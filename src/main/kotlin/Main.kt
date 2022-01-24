@@ -1,3 +1,6 @@
+import java.util.logging.Level
+import java.util.logging.LogManager
+
 //Superclase de las armas
 open class ArmaDeFuego(
     var nombre: String,
@@ -55,10 +58,10 @@ open class ArmaDeFuego(
 
             }
 
-
-
-
 fun main() {
+    //Se pone la variable l para poder poner logs en vez de println
+    val l = LogManager.getLogManager().getLogger("").apply { level = Level.ALL }
+
     //Instancio 3 objetos, cada uno de una subclase distinta
     var Rk9: Pistola = Pistola("Rk9", 15, 1, "9mm", 2, "Pqueño")
     var AK47: Rifle = Rifle("AK47", 30, 3, "11mm", 3, "Amplio")
@@ -67,14 +70,14 @@ fun main() {
     var listaArma = listOf<ArmaDeFuego>(Rk9, RPG, AK47)
     var mapaAleatorio = mutableMapOf<Int, ArmaDeFuego>()
 
-    //Se crea un bucle para que las armas disparen de forma aleatoria
+    //Se hace un log para comprobar que el objeto que va a disparar es el mismo que el que dispara
     for (i in 1..6){
     var random = (0..2).random()
     mapaAleatorio.put(i,listaArma[random])
     }
     //Imprime los objetos seleccionados de forma aleatoria que van a disparar
     for (it in mapaAleatorio){
-        println("${it.value}")
+        l.info("${it.value}")
 
 }
     println()
